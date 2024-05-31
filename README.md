@@ -67,14 +67,19 @@ torchrun --standalone --nnodes 1 --nproc-per-node 8 pretrain.py
 
 ### Evaluation <a name="evaluation"></a>
 #### Referring Expression Grounding
+Step 1. Prepare the OCID-Ref dataset following this [repo](https://github.com/lluma/OCID-Ref). Then put the dataset to 
 
 ```bash
+/mpi_evaluation/referring_grounding/data/langref
+```
+
+Step 2. Initiate evaluation with
+```bash
 python mpi_evaluation/refering_express_grounding/evaluate_refer.py test_only=False iou_threshold=0.5 lr=1e-3 \
-load_checkpoint=\"\" \
 model=\"mpi-small\" \
 save_path=\"MPI-Small-IOU0.5\" \
-eval_checkpoint_path=\"path_to/MPI-small-state_dict.pt\" \
-language_model_path=\"path_to/distilbert-base-uncased\" \
+eval_checkpoint_path=\"path_to_your/MPI-small-state_dict.pt\" \
+language_model_path=\"path_to_your/distilbert-base-uncased\" \
 ```
 
 or you can simply use 
