@@ -1,0 +1,81 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mpi"
+authors = [
+    {name = "Jia Zeng", email="zengjia@shlab.org.cn"},
+    {name = "Qingwen Bu", email="buqingwen@sjtu.edu.cn"}
+]
+description = "Learning Manipulation by Predicting Interaction"
+version = "1.0.0"
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = ["robotic manipulation", "representation learning"]
+license = {file = "LICENSE"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "av==11.0.0",
+    "einops==0.8.0",
+    "gdown==4.7.1",
+    "h5py==3.10.0",
+    "hurry.filesize==0.9",
+    "hydra-core==1.1.1",
+    "jsonlines==4.0.0",
+    "omegaconf==2.1.2",
+    "opencv-python==4.8.1.78",
+    "numpy==1.26.4",
+    "pandas==2.2.2",
+    "rich==13.7.1",
+    "torch==2.0.0",
+    "torchvision>=0.15.0",
+    "timm==0.9.12",
+    "tqdm==4.66.1",
+    "transformers==4.35.2",
+    "wandb==0.16.0",
+    "lightning==1.8.6",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "ipython",
+    "pre-commit",
+    "ruff",
+]
+
+[project.urls]
+homepage = "https://github.com/OpenDriveLab/MPI"
+repository = "https://github.com/OpenDriveLab/MPI"
+documentation = "https://github.com/OpenDriveLab/MPI"
+
+[tool.black]
+line-length = 121
+target-version = ["py38", "py39", "py310"]
+preview = true
+
+[tool.ruff]
+line-length = 121
+target-version = "py38"
+select = ["A", "B", "C90", "E", "F", "I", "RUF", "W"]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["E402", "F401"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+exclude = ["cache"]

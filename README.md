@@ -21,9 +21,7 @@
 
 ## :rocket: News
 
-- **[2024/05/31]** We released the implementation of pre-training. 
-<!-- - **[2024/05/31]** We released the implementation of evaluation on Referring Expression Grounding task. -->
-<!-- - **[2024/06/03]** We released our [paper](https://opendrivelab.github.io/mpi.github.io/resources/RSS_2024_MPI.pdf) on arXiv. -->
+- **[2024/05/31]** We released the implementation of pre-training and evaluation on Referring Expression Grounding task. 
 
 ## :page_facing_up: TODO List
 
@@ -39,7 +37,7 @@
 
 ### Installation <a name="installation"></a>
 
-Step 1. Install required packages with
+Step 1. Clone and setup MPI dependency:
 ```bash
 git clone https://github.com/OpenDriveLab/MPI
 cd MPI
@@ -50,11 +48,24 @@ Step 2. Prepare the language model, you may download DistillBERT from [HuggingFa
 
 
 ### Prepare Dataset <a name="dataset"></a>
-
+Download [Ego4D](https://ego4d-data.org/docs/start-here/) Hand-and-Object dataset:
 ```
-python prepare_dataset.py --root_path <path-to-your-data>
-e.g.
-python prepare_dataset.py --root_path ego4d/hand_object_interactions/v2/
+# Download the CLI
+pip install ego4d
+# Select Subset Of Hand-and-Object
+python -m ego4d.cli.cli --output_directory=<path-to-save-dir> --datasets clips annotations  --metadata --version v2 --benchmarks FHO
+```
+Your directory tree should look like this: 
+```
+$<path-to-save-dir>
+├── ego4d.json
+└── v2
+    |—— annotations  
+    └── clips
+```
+Preprocess dataset for pre-training MPI:
+```
+python prepare_dataset.py --root_path <path-to-save-dir>/v2/
 ```
 
 ### Pre-training <a name="pretraining"></a>
