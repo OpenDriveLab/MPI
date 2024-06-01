@@ -1,9 +1,7 @@
-"""
-instantiate.py
-
-Simple wrapping script for instantiating a core Voltron/reproduction model and configuring the torch.Optimizer for DDP
-pretraining. Meant to be modular and extensible!
-"""
+# ------------------------------------------------------------------------------------------------
+# Modified from:
+# Voltron: https://github.com/siddk/voltron-robotics
+# ------------------------------------------------------------------------------------------------
 from typing import Callable, Tuple
 
 import torch.nn as nn

@@ -81,7 +81,7 @@ torchrun --standalone --nnodes 1 --nproc-per-node 8 pretrain.py
 Step 1. Prepare the OCID-Ref dataset following this [repo](https://github.com/lluma/OCID-Ref). Then put the dataset to 
 
 ```bash
-/mpi_evaluation/referring_grounding/data/langref
+./mpi_evaluation/referring_grounding/data/langref
 ```
 
 Step 2. Initiate evaluation with

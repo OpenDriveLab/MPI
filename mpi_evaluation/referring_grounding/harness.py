@@ -39,7 +39,7 @@ class ReferDetectionHarness:
         extractor_init_fn: Callable[[], nn.Module],
         detector_init_fn: Callable[[nn.Module, nn.Module], LightningModule] = instantiate_detector,
         run_dir: Path = Path("runs/evaluation/langref"),
-        data: Path = Path("data/langref"),
+        data: str = "data/langref",
         bsz: int = 256,
         epochs: int = 10,
         seed: int = 6,
@@ -51,6 +51,7 @@ class ReferDetectionHarness:
         self.model_id, self.backbone, self.preprocess = model_id, backbone, preprocess
         self.extractor_init_fn, self.detector_init_fn = extractor_init_fn, detector_init_fn
         self.language_model_path = language_model_path
+        data = Path(os.path.join(os.path.split(os.path.realpath(__file__))[0], data))
         self.run_dir, self.data, self.bsz, self.epochs, self.seed = run_dir, data, bsz, epochs, seed
         self.load_checkpoint = load_checkpoint
         self.lr = lr
@@ -125,3 +126,5 @@ class ReferDetectionHarness:
             ("Accuracy on Stacked Split (Hard)", "stacked_acc25"),
         ]:
             overwatch.info(f"\t{mname}: {metrics[mkey]:0.4f}")
+
+

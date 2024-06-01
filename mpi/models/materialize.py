@@ -1,9 +1,7 @@
-"""
-materialize.py
-
-Core functionality for using pretrained models; defines the package-level `load` functionality for downloading and
-instantiating pretrained Voltron (and baseline) models.
-"""
+# ------------------------------------------------------------------------------------------------
+# Modified from:
+# Voltron: https://github.com/siddk/voltron-robotics
+# ------------------------------------------------------------------------------------------------
 import json
 import os
 from pathlib import Path
