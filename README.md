@@ -3,8 +3,8 @@
 
 
 <h3 align="center">
-  <a href="https://opendrivelab.github.io/mpi.github.io/#">Project Website</a> |
-  <a href="https://opendrivelab.github.io/mpi.github.io/resources/RSS_2024_MPI.pdf">Paper</a> |
+  <a href="https://opendrivelab.com/MPI/">Project Website</a> |
+  <a href="https://arxiv.org/abs/2406.00439">Paper</a> |
   RSS 2024
 </h3>
 
@@ -22,6 +22,7 @@
 ## :rocket: News
 
 - **[2024/05/31]** We released the implementation of pre-training and evaluation on Referring Expression Grounding task. 
+- **[2024/06/04]** We released our [paper](https://arxiv.org/abs/2406.00439) on arXiv.
 
 ## :page_facing_up: TODO List
 
