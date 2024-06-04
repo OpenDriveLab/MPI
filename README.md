@@ -18,6 +18,27 @@
 - Foster better comprehension of “how-to-interact” and “where-to-interact”.
 - Acquire more informative representations during pre-training and achieve evident improvement across downstream tasks.
 
+## :movie_camera: Demo
+Real-world robot experiments on complex kitchen environment.
+
+<table class="center">
+<tr>
+  <td style="text-align:center;"><b>Take the spatula off the shelf (2x speed)</b></td>
+  <td style="text-align:center;"><b>Lift up the pot lid (2x speed)</b></td>
+</tr>
+<tr>
+  <td><video src="https://opendrivelab.com/MPI/resources/mpi/visuomotor/take_the_spatula_2.mp4" autoplay></td>
+  <td><video src="https://opendrivelab.com/MPI/resources/mpi/visuomotor/lift_up_the_pot_lid_2.mp4" autoplay></td>
+</tr>
+<tr>
+  <td style="text-align:center;"><b>Close the drawer (2x speed)</b></td>
+  <td style="text-align:center;"><b>Put pot into sink (2x speed)</b></td>
+</tr>
+<tr>
+  <td><video src="https://opendrivelab.com/MPI/resources/mpi/visuomotor/close_drawer_2.mp4" autoplay></td>
+  <td><video src="https://opendrivelab.com/MPI/resources/mpi/visuomotor/mov_pot_into_sink_2.mp4" autoplay></td>
+</tr>
+</table>
 
 ## :rocket: News
 
