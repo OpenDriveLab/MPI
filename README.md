@@ -27,16 +27,16 @@ Real-world robot experiments on complex kitchen environment.
   <td style="text-align:center;"><b>Lift up the pot lid (2x speed)</b></td>
 </tr>
 <tr>
-  <td><video src="https://opendrivelab.com/MPI/resources/mpi/visuomotor/take_the_spatula_2.mp4" autoplay></td>
-  <td><video src="https://opendrivelab.com/MPI/resources/mpi/visuomotor/lift_up_the_pot_lid_2.mp4" autoplay></td>
+  <td><video src="https://github.com/OpenDriveLab/MPI/assets/33364294/1652a279-6ec2-4150-97fd-4144b6a55914" autoplay></td>
+  <td><video src="https://github.com/OpenDriveLab/MPI/assets/33364294/818025c9-63fe-4889-af54-1a5e79fd5b8a" autoplay></td>
 </tr>
 <tr>
   <td style="text-align:center;"><b>Close the drawer (2x speed)</b></td>
   <td style="text-align:center;"><b>Put pot into sink (2x speed)</b></td>
 </tr>
 <tr>
-  <td><video src="https://opendrivelab.com/MPI/resources/mpi/visuomotor/close_drawer_2.mp4" autoplay></td>
-  <td><video src="https://opendrivelab.com/MPI/resources/mpi/visuomotor/mov_pot_into_sink_2.mp4" autoplay></td>
+  <td><video src="https://github.com/OpenDriveLab/MPI/assets/33364294/375edd93-cca6-447a-bc21-ed9d8d8bda77" autoplay></td>
+  <td><video src="https://github.com/OpenDriveLab/MPI/assets/33364294/91697ec0-2414-424e-b1e8-821ffccc71b3" autoplay></td>
 </tr>
 </table>
 
