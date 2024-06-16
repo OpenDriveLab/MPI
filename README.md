@@ -47,8 +47,16 @@ Real-world robot experiments on complex kitchen environment.
 
 ## :page_facing_up: TODO List
 
-- [ ] Model weights release.
+- [x] Model weights release.
 - [ ] Evaluation code on Franka Kitchen environment.
+
+
+## Checkpoints
+
+|Model|Checkpoint|Params.|
+|:------:|:------:|:------:|
+|MPI-Small|[GoogleDrive](https://drive.google.com/file/d/1N7zCWi9ztrcCHsm4xhAA1hsnviv2gdvn/view?usp=drive_link)|22M|
+|MPI-Base|[GoogleDrive](https://drive.google.com/file/d/1JCpnxYGrrML8hdnMh0UeK6p_XuLNhmdm/view?usp=drive_link)|86M|
 
 
 ## Getting Started <a name="start"></a>
