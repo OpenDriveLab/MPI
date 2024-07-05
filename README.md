@@ -47,18 +47,18 @@ Real-world robot experiments on complex kitchen environment.
 - **[2024/06/16]** We released the model weights.
 - **[2024/07/05]** We released the evaluation code on Franka Kitchen environment.
 
-## Getting Started <a name="start"></a>
-- [Installation](#installation)
-- [Prepare Dataset](#dataset)
-- [Pre-training](#pretraining)
-- [Evaluation](#evaluation)
-
-## Checkpoints
+## :luggage: Checkpoints
 
 |Model|Checkpoint|Params.|
 |:------:|:------:|:------:|
 |MPI-Small|[GoogleDrive](https://drive.google.com/file/d/1N7zCWi9ztrcCHsm4xhAA1hsnviv2gdvn/view?usp=drive_link)|22M|
 |MPI-Base|[GoogleDrive](https://drive.google.com/file/d/1JCpnxYGrrML8hdnMh0UeK6p_XuLNhmdm/view?usp=drive_link)|86M|
+
+## Getting Started <a name="start"></a>
+- [Installation](#installation)
+- [Prepare Dataset](#dataset)
+- [Pre-training](#pretraining)
+- [Evaluation](#evaluation)
 
 ### Installation <a name="installation"></a>
 
@@ -124,6 +124,8 @@ bash mpi_evaluation/referring_grounding/eval_refer.sh
 ```
 
 #### Franka Kitchen
+Following the [guidebook](./mpi_evaluation/franka_kitchen/README.MD) to setup Franka Kitchen environment and download the expert demonstrations.
+
 Evaluating visuomotor control on Franka Kitchen environment with **25** expert demonstration.
 ```bash
 CUDA_VISIBLE_DEVICES=0 PYTHONPATH=mpi_evaluation/franka_kitchen/MPIEval/core python mpi_evaluation/franka_kitchen/MPIEval/core/hydra_launcher.py hydra/launcher=local hydra/output=local env="kitchen_knob1_on-v3" camera="left_cap2" pixel_based=true embedding=ViT-Small num_demos=25 env_kwargs.load_path=mpi-small bc_kwargs.finetune=false job_name=mpi-small seed=125 proprio=9
