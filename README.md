@@ -44,12 +44,14 @@ Real-world robot experiments on complex kitchen environment.
 
 - **[2024/05/31]** We released the implementation of pre-training and evaluation on Referring Expression Grounding task. 
 - **[2024/06/04]** We released our [paper](https://arxiv.org/abs/2406.00439) on arXiv.
+- **[2024/06/16]** We released the model weights.
+- **[2024/07/05]** We released the evaluation code on Franka Kitchen environment.
 
-## :page_facing_up: TODO List
-
-- [x] Model weights release.
-- [ ] Evaluation code on Franka Kitchen environment.
-
+## Getting Started <a name="start"></a>
+- [Installation](#installation)
+- [Prepare Dataset](#dataset)
+- [Pre-training](#pretraining)
+- [Evaluation](#evaluation)
 
 ## Checkpoints
 
@@ -57,13 +59,6 @@ Real-world robot experiments on complex kitchen environment.
 |:------:|:------:|:------:|
 |MPI-Small|[GoogleDrive](https://drive.google.com/file/d/1N7zCWi9ztrcCHsm4xhAA1hsnviv2gdvn/view?usp=drive_link)|22M|
 |MPI-Base|[GoogleDrive](https://drive.google.com/file/d/1JCpnxYGrrML8hdnMh0UeK6p_XuLNhmdm/view?usp=drive_link)|86M|
-
-
-## Getting Started <a name="start"></a>
-- [Installation](#installation)
-- [Prepare Dataset](#dataset)
-- [Pre-training](#pretraining)
-- [Evaluation](#evaluation)
 
 ### Installation <a name="installation"></a>
 
@@ -99,8 +94,8 @@ python prepare_dataset.py --root_path <path-to-save-dir>/v2/
 ```
 
 ### Pre-training <a name="pretraining"></a>
-
 <img width="1000" alt="mpi" src="assets/pretrain_pipeline.png">
+Pre-train MPI on 8 Nvidia A100 GPUs:
 
 ```bash
 torchrun --standalone --nnodes 1 --nproc-per-node 8 pretrain.py
@@ -129,7 +124,10 @@ bash mpi_evaluation/referring_grounding/eval_refer.sh
 ```
 
 #### Franka Kitchen
-**TBD**
+Evaluating visuomotor control on Franka Kitchen environment with **25** expert demonstration.
+```bash
+CUDA_VISIBLE_DEVICES=0 PYTHONPATH=mpi_evaluation/franka_kitchen/MPIEval/core python mpi_evaluation/franka_kitchen/MPIEval/core/hydra_launcher.py hydra/launcher=local hydra/output=local env="kitchen_knob1_on-v3" camera="left_cap2" pixel_based=true embedding=ViT-Small num_demos=25 env_kwargs.load_path=mpi-small bc_kwargs.finetune=false job_name=mpi-small seed=125 proprio=9
+```
 
 ## Citation
 

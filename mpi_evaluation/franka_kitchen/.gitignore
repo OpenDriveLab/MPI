@@ -1,0 +1,11 @@
+outputs/
+demostrations/
+__pycache__/
+.nfs*
+*.egg-info
+*.tar.gz
+*.zip
+build
+checkpoints
+dist
+*.out
