@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "mpi"
 authors = [
     {name = "Jia Zeng", email="zengjia@shlab.org.cn"},
-    {name = "Qingwen Bu", email="buqingwen@sjtu.edu.cn"}
+    {name = "Qingwen Bu", email="qwbu01@sjtu.edu.cn"}
 ]
 description = "Learning Manipulation by Predicting Interaction"
 version = "1.0.0"
