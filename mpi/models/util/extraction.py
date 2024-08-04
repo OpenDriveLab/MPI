@@ -33,7 +33,6 @@ class MAPAttention(nn.Module):
     def forward(self, seed: torch.Tensor, x: torch.Tensor, attention_mask = None) -> torch.Tensor:
         (B_s, K, C_s), (B_x, N, C_x) = seed.shape, x.shape
         assert C_s == C_x, "Seed vectors and pool inputs must have the same embedding dimensionality!"
-
         # Project Seed Vectors to `queries`
         q = self.q(seed).reshape(B_s, K, self.n_heads, C_s // self.n_heads).permute(0, 2, 1, 3)
         kv = self.kv(x).reshape(B_x, N, 2, self.n_heads, C_x // self.n_heads).permute(2, 0, 3, 1, 4)
@@ -90,10 +89,10 @@ class MAPBlock(nn.Module):
             nn.Linear(int(mlp_ratio * self.embed_dim), self.embed_dim),
         )
 
-    def forward(self, x: torch.Tensor, mask = None, init_embed = None) -> torch.Tensor:
+    def forward(self, x: torch.Tensor, init_embed = None) -> torch.Tensor:
         latents = repeat(self.latents, "n_latents d -> bsz n_latents d", bsz=x.shape[0])
         latents = latents + init_embed.unsqueeze(1) if init_embed is not None else latents
-        latents = self.attn_norm(latents + self.attn(latents, self.projection(x), mask))
+        latents = self.attn_norm(latents + self.attn(latents, self.projection(x)))
         latents = self.mlp_norm(latents + self.mlp(latents))
         return latents.squeeze(dim=1)
 

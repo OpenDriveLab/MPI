@@ -1,11 +1,12 @@
 # work dirs
 data
 runs
-distilbert-base-uncased
 *.pt
 *.zip
 .vscode
 checkpoints
+demonstrations
+distilbert-base-uncased
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -233,11 +233,8 @@ class StateEmbedding(gym.ObservationWrapper):
         langs = []
         obs = data['observations'][idx]
         if 'mpi' in self.load_path:
-            pre_obs = data['pre_observations'][idx]
             for i_obs in range(len(obs)):
                 img = self.transforms(Image.fromarray(obs[i_obs].astype(np.uint8))).unsqueeze(0)
-                #pre_img = self.transforms(Image.fromarray(pre_obs[i_obs].astype(np.uint8))).unsqueeze(0)
-                #images.append(torch.stack((pre_img, img), dim=1))
                 images.append(torch.stack((img, img), dim=1))
                 langs.append(promot_for_env_name[self.env_name])
         else:
@@ -253,7 +250,7 @@ class StateEmbedding(gym.ObservationWrapper):
         inp = inp.to(self.device)
         if finetune and self.start_finetune:
             if "mpi" in self.load_path:
-                emb = self.embedding.get_representations(inp, langs, mode = self.mode) # False
+                emb = self.embedding.get_representations(inp, langs, mode = self.mode)
             else:
                 emb = self.embedding(inp).view(-1, self.embedding_dim)
         else:

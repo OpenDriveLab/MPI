@@ -367,7 +367,7 @@ class Metrics:
             metrics={
                     "Pretrain/Step": self.global_step,
                     "Pretrain/Epoch": epoch,
-                    "Pretrain/MAPLE Train Loss": loss,
+                    "Pretrain/MPI Train Loss": loss,
                     "Pretrain/Learning Rate": lr,
                     "Pretrain/Step Time": step_time,
                 }

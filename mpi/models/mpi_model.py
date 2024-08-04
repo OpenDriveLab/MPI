@@ -282,7 +282,7 @@ class MPI(nn.Module):
             and imgs.shape[1] == 2
             and (language is None or isinstance(language, list) or isinstance(language, tuple))
         ), "Invalid input to `get_representations()`"
-        assert mode in {'all', 'agg_only'}, f"Extraction mode `{mode}` not supported!"
+        # assert mode in {'all', 'agg_only'}, f"Extraction mode `{mode}` not supported!"
 
         # Tokenize Language --> note max length is 20!
         if language is None:
@@ -351,6 +351,9 @@ class MPI(nn.Module):
             return torch.cat([aggregated_embedding_vis.unsqueeze(1), aggregated_embedding_lang.unsqueeze(1), fused_visual_embed, lang], dim=1)
         elif mode =='agg_only':
             return torch.cat([aggregated_embedding_vis, aggregated_embedding_lang], dim=-1)
+        else:
+            return torch.cat([aggregated_embedding_vis.unsqueeze(1), aggregated_embedding_lang.unsqueeze(1), fused_visual_embed, lang], dim=1)
+
 
 
     def forward_encoder(

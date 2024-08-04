@@ -47,13 +47,6 @@ Real-world robot experiments on complex kitchen environment.
 - **[2024/06/16]** We released the model weights.
 - **[2024/07/05]** We released the evaluation code on Franka Kitchen environment.
 
-## :luggage: Checkpoints
-
-|Model|Checkpoint|Params.|
-|:------:|:------:|:------:|
-|MPI-Small|[GoogleDrive](https://drive.google.com/file/d/1N7zCWi9ztrcCHsm4xhAA1hsnviv2gdvn/view?usp=drive_link)|22M|
-|MPI-Base|[GoogleDrive](https://drive.google.com/file/d/1JCpnxYGrrML8hdnMh0UeK6p_XuLNhmdm/view?usp=drive_link)|86M|
-
 ## Getting Started <a name="start"></a>
 - [Installation](#installation)
 - [Prepare Dataset](#dataset)
@@ -71,6 +64,17 @@ pip install -e .
 
 Step 2. Prepare the language model, you may download DistillBERT from [HuggingFace](https://huggingface.co/distilbert/distilbert-base-uncased)
 
+### Get representation
+
+#### :luggage: Checkpoints
+To directly utilize MPI for extracting representations, please download our pre-trained weights:
+|Model|Checkpoint|Params.|Config|
+|:------:|:------:|:------:|:------:|
+|MPI-Small|[GoogleDrive](https://drive.google.com/file/d/1N7zCWi9ztrcCHsm4xhAA1hsnviv2gdvn/view?usp=drive_link)|22M|[GoogleDrive](https://drive.google.com/file/d/1zG9O9-F86hJowxCUrgpVFfanbIjwn9Tp/view?usp=sharing)|
+|MPI-Base|[GoogleDrive](https://drive.google.com/file/d/1JCpnxYGrrML8hdnMh0UeK6p_XuLNhmdm/view?usp=drive_link)|86M|[GoogleDrive](https://drive.google.com/file/d/1NYiPd72DEjVmErxg5lEHeRxWD0jJKz-0/view?usp=sharing)|
+
+#### Obtain representation from pretrained MPI
+We provide a example code [get_representation.py](./get_representation.py) to show how to obtain the pre-trained MPI features. The MPI encoder by default requires two images as input. In downstream tasks, we simply replicate the current observation to ensure compatibility.
 
 ### Prepare Dataset <a name="dataset"></a>
 Download [Ego4D](https://ego4d-data.org/docs/start-here/) Hand-and-Object dataset:
