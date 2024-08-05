@@ -76,6 +76,9 @@ To directly utilize MPI for extracting representations, please download our pre-
 #### Obtain representation from pretrained MPI
 We provide a example code [get_representation.py](./get_representation.py) to show how to obtain the pre-trained MPI features. The MPI encoder by default requires two images as input. In downstream tasks, we simply replicate the current observation to ensure compatibility.
 
+The following diagram presents the composition and arrangement of the extracted tokens:
+<img width="400" alt="tokens_mpi" src="assets/tokens_mpi.jpg">
+
 ### Prepare Dataset <a name="dataset"></a>
 Download [Ego4D](https://ego4d-data.org/docs/start-here/) Hand-and-Object dataset:
 ```

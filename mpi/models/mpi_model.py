@@ -265,7 +265,7 @@ class MPI(nn.Module):
 
     
     def get_representations(
-        self, imgs: torch.Tensor, language: Optional[Union[List[str], Tuple[str]]] = None, mode: str = "all"
+        self, imgs: torch.Tensor, language: Optional[Union[List[str], Tuple[str]]] = None, with_lang_tokens = True,
     ) -> torch.Tensor:
         """
         Given either a singleton (dual-imgs, language) pair or batch of dual-imgs and language, extract representations
@@ -282,7 +282,8 @@ class MPI(nn.Module):
             and imgs.shape[1] == 2
             and (language is None or isinstance(language, list) or isinstance(language, tuple))
         ), "Invalid input to `get_representations()`"
-        # assert mode in {'all', 'agg_only'}, f"Extraction mode `{mode}` not supported!"
+        if language is None:
+            with_lang_tokens = False
 
         # Tokenize Language --> note max length is 20!
         if language is None:
@@ -298,14 +299,17 @@ class MPI(nn.Module):
                 lang_mask = repeat(lang_mask, "b seq -> (bsz b) seq", bsz=imgs.size(0))
 
         # Extract desired representations...
-        representations = self.encode(imgs, lang, lang_mask, mode)
+        representations = self.encode(imgs, lang, lang_mask, with_lang_tokens)
         return representations 
 
 
-    def encode(self, imgs: torch.Tensor, lang: torch.Tensor, lang_mask: torch.Tensor, mode = 'all') -> torch.Tensor:
+    def encode(self, imgs: torch.Tensor, lang: torch.Tensor, lang_mask: torch.Tensor, with_lang_tokens = True) -> torch.Tensor:
         """Default representation extraction function, given a batch of dual-images and tokenized language."""
-        lang_embeddings = self.encode_language(lang, lang_mask)
-        projected_lang = self.lang2encoder(lang_embeddings)
+        if with_lang_tokens:
+            lang_embeddings = self.encode_language(lang, lang_mask)
+            projected_lang = self.lang2encoder(lang_embeddings)
+            lang = projected_lang + self.lang_token
+            aggregated_embedding_lang = self.token_aggregate(lang, self.lang_latents)
 
         # Patchify, broadcast position embedding across ctx_len (0 + K) dimension, unfold, add `ctx_enc_pe` embeddings!
         patches = self.patch2embed(rearrange(imgs, "bsz ctx channels res1 res2 -> (bsz ctx) channels res1 res2"))
@@ -313,14 +317,12 @@ class MPI(nn.Module):
         ctx_patches = rearrange(patches_pe, "(bsz ctx) seq embed -> bsz ctx seq embed", ctx=2)
         b, c, seq, d = ctx_patches.shape
 
-
         # Add context embedding to differentiate
         ctx_patches = ctx_patches + torch.index_select(self.ctx_enc_pe, 1, torch.tensor([0, 0]).to(patches.device))
         visible_patches = rearrange(ctx_patches, "bsz ctx seq embed -> bsz (seq ctx) embed", ctx=2)
-    
                            
         # Add "modality" embeddings to patches & language & flatten out context patches...
-        visible_patches, lang = visible_patches + self.img_token, projected_lang + self.lang_token
+        visible_patches = visible_patches + self.img_token
 
         # Create "dummy" visible mask
         visible_mask = torch.ones_like(visible_patches[..., -1], dtype=lang_mask.dtype)
@@ -341,18 +343,13 @@ class MPI(nn.Module):
                                                 level_start_index = torch.tensor(0).to(ctx_patches.device))
         fused_visual_embed = self.temporal_attn_norm( visual_embed[:,0] + fused_visual_embed )
 
-
         # Token aggregator
         aggregated_embedding_vis  = self.token_aggregate(fused_visual_embed, self.vis_latents)
-        aggregated_embedding_lang = self.token_aggregate(lang, self.lang_latents)
 
-
-        if mode == 'all':
-            return torch.cat([aggregated_embedding_vis.unsqueeze(1), aggregated_embedding_lang.unsqueeze(1), fused_visual_embed, lang], dim=1)
-        elif mode =='agg_only':
-            return torch.cat([aggregated_embedding_vis, aggregated_embedding_lang], dim=-1)
+        if with_lang_tokens:
+            return torch.cat([fused_visual_embed, aggregated_embedding_vis.unsqueeze(1), lang, aggregated_embedding_lang.unsqueeze(1)], dim=1)
         else:
-            return torch.cat([aggregated_embedding_vis.unsqueeze(1), aggregated_embedding_lang.unsqueeze(1), fused_visual_embed, lang], dim=1)
+            return torch.cat([fused_visual_embed, aggregated_embedding_vis.unsqueeze(1)], dim=1)
 
 
 

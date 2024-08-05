@@ -151,14 +151,13 @@ class StateEmbedding(gym.ObservationWrapper):
 
     """
     def __init__(self, env, embedding_name=None, device='cuda', load_path="", proprio=0, camera_name=None, 
-                 env_name=None, mode = 'multimodal', path_demo= "", path_ckpt=""):
+                 env_name=None, path_demo= "", path_ckpt=""):
         gym.ObservationWrapper.__init__(self, env)
 
         self.proprio = proprio
         self.load_path = load_path
         self.start_finetune = False
         self.env_name = env_name
-        self.mode = mode
         if load_path == "r3m":
             from r3m import load_r3m_reproduce
             rep = load_r3m_reproduce("r3m")
@@ -205,7 +204,7 @@ class StateEmbedding(gym.ObservationWrapper):
             inp = inp.to(self.device)
             with torch.no_grad():
                 if "mpi" in self.load_path:
-                    emb = self.embedding.get_representations(inp, lang, mode = self.mode) # False
+                    emb = self.embedding.get_representations(inp, lang) # False
                     emb = emb.to('cpu').numpy().squeeze()
                 elif "r3m" in self.load_path:
                     emb = self.embedding.module.obtain_feature_before_pooling(inp)
@@ -250,13 +249,13 @@ class StateEmbedding(gym.ObservationWrapper):
         inp = inp.to(self.device)
         if finetune and self.start_finetune:
             if "mpi" in self.load_path:
-                emb = self.embedding.get_representations(inp, langs, mode = self.mode)
+                emb = self.embedding.get_representations(inp, langs)
             else:
                 emb = self.embedding(inp).view(-1, self.embedding_dim)
         else:
             with torch.no_grad():
                 if "mpi" in self.load_path:
-                    emb = self.embedding.get_representations(inp, langs, mode = self.mode) # False
+                    emb = self.embedding.get_representations(inp, langs) # False
                 elif "r3m" in self.load_path:
                     emb = self.embedding.module.obtain_feature_before_pooling(inp)
                     emb = emb.view(emb.shape[0], emb.shape[1], -1).permute(0, 2, 1)

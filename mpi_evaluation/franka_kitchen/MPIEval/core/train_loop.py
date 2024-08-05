@@ -25,7 +25,7 @@ import torch.nn as nn
 def env_constructor(env_name, device='cuda', image_width=256, image_height=256,
                     camera_name=None, embedding_name='resnet50', pixel_based=True,
                     render_gpu_id=0, load_path="", proprio=False, lang_cond=False, gc=False, 
-                    mode = 'multimodal', path_demo = '.', path_ckpt = '.'):
+                    path_demo = '.', path_ckpt = '.'):
 
     ## If pixel based will wrap in a pixel observation wrapper
     if pixel_based:
@@ -36,7 +36,7 @@ def env_constructor(env_name, device='cuda', image_width=256, image_height=256,
                            camera_name=camera_name, device_id=render_gpu_id)
         ## Wrapper which encodes state in pretrained model
         e = StateEmbedding(e, embedding_name=embedding_name, device=device, load_path=load_path, 
-                        proprio=proprio, camera_name=camera_name, env_name=env_name, mode=mode, path_ckpt = path_ckpt)
+                        proprio=proprio, camera_name=camera_name, env_name=env_name, path_ckpt = path_ckpt)
         e = GymEnv(e)
     else:
         print("Only supports pixel based")

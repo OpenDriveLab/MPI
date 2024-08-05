@@ -42,7 +42,6 @@ env_kwargs:
     gc            :   False
     path_demo     :   '/home/opendrivelab/projects/MPI/demonstrations' # path to demonstration
     path_ckpt     :   '/home/opendrivelab/projects/MPI/checkpoints' # path to checkpoint
-    mode          :   all              # extraction mode of MPI representation
 
 # demo reparsing arguments (states -> image embeddings)
 reparse_kwargs:
