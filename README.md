@@ -49,7 +49,7 @@ Real-world robot experiments on complex kitchen environment.
 
 ## Getting Started <a name="start"></a>
 - [Installation](#installation)
-- [Prepare Dataset](#dataset)
+- [Get representation](#representation)
 - [Pre-training](#pretraining)
 - [Evaluation](#evaluation)
 
@@ -64,7 +64,7 @@ pip install -e .
 
 Step 2. Prepare the language model, you may download DistillBERT from [HuggingFace](https://huggingface.co/distilbert/distilbert-base-uncased)
 
-### Get representation
+### Get representation <a name="representation"></a>
 
 #### :luggage: Checkpoints
 To directly utilize MPI for extracting representations, please download our pre-trained weights:
@@ -79,7 +79,8 @@ We provide a example code [get_representation.py](./get_representation.py) to sh
 The following diagram presents the composition and arrangement of the extracted tokens:
 <img width="400" alt="tokens_mpi" src="assets/tokens_mpi.jpg">
 
-### Prepare Dataset <a name="dataset"></a>
+### Pre-training <a name="pretraining"></a>
+#### Prepare Pre-training Dataset
 Download [Ego4D](https://ego4d-data.org/docs/start-here/) Hand-and-Object dataset:
 ```
 # Download the CLI
@@ -100,7 +101,7 @@ Preprocess dataset for pre-training MPI:
 python prepare_dataset.py --root_path <path-to-save-dir>/v2/
 ```
 
-### Pre-training <a name="pretraining"></a>
+#### Pre-training script
 <img width="1000" alt="mpi" src="assets/pretrain_pipeline.png">
 Pre-train MPI on 8 Nvidia A100 GPUs:
 
