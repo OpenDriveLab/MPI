@@ -73,6 +73,18 @@ To directly utilize MPI for extracting representations, please download our pre-
 |MPI-Small|[GoogleDrive](https://drive.google.com/file/d/1N7zCWi9ztrcCHsm4xhAA1hsnviv2gdvn/view?usp=drive_link)|22M|[GoogleDrive](https://drive.google.com/file/d/1zG9O9-F86hJowxCUrgpVFfanbIjwn9Tp/view?usp=sharing)|
 |MPI-Base|[GoogleDrive](https://drive.google.com/file/d/1JCpnxYGrrML8hdnMh0UeK6p_XuLNhmdm/view?usp=drive_link)|86M|[GoogleDrive](https://drive.google.com/file/d/1NYiPd72DEjVmErxg5lEHeRxWD0jJKz-0/view?usp=sharing)|
 
+
+Your directory tree should look like this: 
+```
+checkpoints
+├── mpi-small
+|   |—— MPI-small-state_dict.pt  
+|   └── MPI-small.json
+└── mpi-base
+    |—— MPI-base-state_dict.pt    
+    └── MPI-base.json
+```
+
 #### Obtain representation from pretrained MPI
 We provide a example code [get_representation.py](./get_representation.py) to show how to obtain the pre-trained MPI features. The MPI encoder by default requires two images as input. In downstream tasks, we simply replicate the current observation to ensure compatibility.
 
@@ -144,10 +156,10 @@ CUDA_VISIBLE_DEVICES=0 PYTHONPATH=mpi_evaluation/franka_kitchen/MPIEval/core pyt
 If you find the project helpful for your research, please consider citing our paper:
 
 ```bibtex
-@inproceedings{zeng2024mpi,
+@article{zeng2024mpi,
   title={Learning Manipulation by Predicting Interaction},
-  author={Jia, Zeng and Qingwen, Bu and Bangjun, Wang and Wenke, Xia and Li, Chen and Hao, Dong and Haoming, Song and Dong, Wang and Di, Hu and Ping, Luo and Heming, Cui and Bin, Zhao and Xuelong, Li and Yu, Qiao and Hongyang, Li},
-  booktitle= {Proceedings of Robotics: Science and Systems (RSS)},
+  author={Zeng, Jia and Bu, Qingwen and Wang, Bangjun and Xia, Wenke and Chen, Li and Dong, Hao and Song, Haoming and Wang, Dong and Hu, Di and Luo, Ping and Cui, Heming and Zhao, Bin and Li, Xuelong and Qiao, Yu and Li, Hongyang},
+  journal={arXiv preprint arXiv:2406.00439},
   year={2024}
 }
 ```
