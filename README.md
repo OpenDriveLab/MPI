@@ -156,9 +156,9 @@ CUDA_VISIBLE_DEVICES=0 PYTHONPATH=mpi_evaluation/franka_kitchen/MPIEval/core pyt
 If you find the project helpful for your research, please consider citing our paper:
 
 ```bibtex
-@article{zeng2024mpi,
+@article{zeng2024learning,
   title={Learning Manipulation by Predicting Interaction},
-  author={Zeng, Jia and Bu, Qingwen and Wang, Bangjun and Xia, Wenke and Chen, Li and Dong, Hao and Song, Haoming and Wang, Dong and Hu, Di and Luo, Ping and Cui, Heming and Zhao, Bin and Li, Xuelong and Qiao, Yu and Li, Hongyang},
+  author={Zeng, Jia and Bu, Qingwen and Wang, Bangjun and Xia, Wenke and Chen, Li and Dong, Hao and Song, Haoming and Wang, Dong and Hu, Di and Luo, Ping and others},
   journal={arXiv preprint arXiv:2406.00439},
   year={2024}
 }
